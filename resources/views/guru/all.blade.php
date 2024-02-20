@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
    <div class="d-flex justify-content-between align-items-center">
-      <h2 class="mb-4 fw-bolder">Daftar Siswa</h2>
+      <h2 class="mb-4 fw-bolder">Daftar Guru</h2>
 
       <div class="d-flex gap-2">
          <div class="dropdown ms-4">
@@ -11,14 +11,14 @@
                 Filter Kelas
             </button>
             <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="{{ url('/student') }}">Show All</a></li>
+                <li><a class="dropdown-item" href="{{ url('/guru') }}">Show All</a></li>
                 @foreach ($kelas as $item)
-                    <li><a class="dropdown-item" href="{{ url('/student/filter', $item->id) }}">{{ $item->nama }}</a></li>
+                    <li><a class="dropdown-item" href="{{ url('/guru/filter', $item->id) }}">{{ $item->nama }}</a></li>
                 @endforeach
             </ul>
          </div>
       
-         <form action="/student/search" class="w-100">
+         <form action="/guru/search" class="w-100">
             <div class="input-group">
                <input type="text" class="form-control" placeholder="Cari..." name="search" value="{{ request('search') }}">
                <button class="btn btn-primary fw-medium" type="submit">Cari</button>
@@ -38,14 +38,13 @@
       </div>
    @endif
 
-   @if($students->count())
+   @if($guru->count())
       <table class="table table-striped table-hover">
          <thead class="thead-dark">
             <tr>
                <th scope="col">No</th>
-               <th scope="col">NIS</th>
                <th scope="col">Nama</th>
-               <th scope="col">Kelas</th>
+               <th scope="col">Mengajar Kelas</th>
                <th scope="col">Aksi</th>
             </tr>
          </thead>
@@ -53,23 +52,22 @@
             @php
                $no = 1;
             @endphp
-            @foreach ($students as $student)
+            @foreach ($guru as $guru)
                <tr>
                   <th scope="row">{{ $no++ }}</th>
-                  <td>{{ $student->nis }}</td>
-                  <td>{{ $student->nama }}</td>
-                  <td>{{ $student->kelas->nama ?? 'Kelas Tidak Ada'}}</td>
+                  <td>{{ $guru->nama }}</td>
+                  <td>{{ $guru->kelas->nama ?? 'Kelas Tidak Ada'}}</td>
                   <td>
                      @auth
-                        <a href="/student/detail/{{ $student->id }}" class="fw-semibold btn btn-primary btn-sm text-white">Detail</a>
-                        <a href="/student/edit/{{ $student->id }}" class="fw-semibold btn btn-warning btn-sm text-white">Edit</a>
-                        <form action="/student/destroy/{{ $student->id }}" method="POST" style="display: inline;">
+                        <a href="/guru/detail/{{ $guru->id }}" class="fw-semibold btn btn-primary btn-sm text-white">Detail</a>
+                        <a href="/guru/edit/{{ $guru->id }}" class="fw-semibold btn btn-warning btn-sm text-white">Edit</a>
+                        <form action="/guru/destroy/{{ $guru->id }}" method="POST" style="display: inline;">
                            @csrf
                            @method('delete')
                            <button type="submit" class="fw-semibold btn btn-danger btn-sm text-white" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">Delete</button>
                         </form>
                      @else
-                        <a href="/student/detail/{{ $student->id }}" class="fw-semibold btn btn-primary btn-sm text-white">Detail</a>
+                        <a href="/guru/detail/{{ $guru->id }}" class="fw-semibold btn btn-primary btn-sm text-white">Detail</a>
                      @endauth
                   </td>
                </tr>
@@ -85,10 +83,12 @@
 
 <div class="container d-flex justify-content-between align-items-start">
    @auth
-      <a href="/student/create" class="btn btn-primary btn-md fw-medium" role="button">Tambah Data Baru</a>
+      <a href="/guru/create" class="btn btn-primary btn-md fw-medium" role="button">Tambah Data Baru</a>
    @endif
-   <ul class="pagination">
-      {{ $students->links() }}
-   </ul>
+   @if($guru->count() > 10)
+      <ul class="pagination">
+         {{ $guru->links() }}
+      </ul>
+   @endif
 </div>
 @endsection

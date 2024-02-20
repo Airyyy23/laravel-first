@@ -1,23 +1,17 @@
-@extends('layouts.main')
+@extends('layouts.maindashboard')
 
 @section('content')
     <div class="container">
-        <h2 class="mb-4 fw-bolder">Edit Data Siswa</h2>
+        <h2 class="mb-4 fw-bolder">Tambah Data Siswa</h2>
 
-        @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
+        @if (session()->has('error'))
+      <div class="alert alert-danger col-lg-12" role="alert">
+         {{ session('error')}}
+      </div>
+   @endif
 
-        <form action="/student/update/{{ $student->id }}" method="POST" class="row g-3">
+        <form action="/dashboard/student/add" method="POST" class="row g-3">
             @csrf
-            @method('PUT')
-
             <div class="col-md-6">
                 <label for="nis" class="form-label">NIS</label>
                 <input type="text" class="form-control" id="nis" name="nis" value="{{ $student->nis }}" required>
@@ -40,7 +34,7 @@
             </div>
 
             <div class="col-md-6">
-                <label for="tanggal_lahir" class="form-label">Tanggal lahir</label>
+                <label for="tanggal_lahir" class="form-label">Tanggal Lahir</label>
                 <input type="date" class="form-control" id="tanggal_lahir" name="tanggal_lahir" value="{{ $student->tanggal_lahir }}" required>
             </div>
 

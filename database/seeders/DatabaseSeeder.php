@@ -14,28 +14,27 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        \App\Models\User::factory(10)->create();
-        \App\Models\Student::factory(10)->create();
+        \App\Models\Student::factory(20)->create();
+        \App\Models\Guru::factory(4)->create();
 
-        \App\Models\User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+        Kelas::create([
+            'nama' => '10 PPLG 1',
+            'guru_id' => 1
         ]);
 
         Kelas::create([
-            'nama' => '10 PPLG 1'
+            'nama' => '10 PPLG 2',
+            'guru_id' => 2
         ]);
 
         Kelas::create([
-            'nama' => '10 PPLG 2'
+            'nama' => '11 PPLG 1',
+            'guru_id' => 3
         ]);
 
         Kelas::create([
-            'nama' => '11 PPLG 1'
-        ]);
-
-        Kelas::create([
-            'nama' => '11 PPLG 2'
+            'nama' => '11 PPLG 2',
+            'guru_id' => 4
         ]);
     }
 }

@@ -8,7 +8,7 @@ use App\Http\Requests\StoreKelasRequest;
 use App\Http\Requests\UpdateKelasRequest;
 use App\Models\Guru;
 
-class KelasController extends Controller
+class DashboardKelasController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -23,7 +23,7 @@ class KelasController extends Controller
     
         $kelas = $kelas->paginate(10);
     
-        return view('kelas.all', [
+        return view('dashboard.kelas.all', [
             "title" => "Kelas",
             "guru" => Guru::all(),
             "kelas" => $kelas
@@ -34,7 +34,7 @@ class KelasController extends Controller
      * Show the form for creating a new resource.
      */
     public function create(Kelas $kelas) {
-        return view('.kelas.create', [
+        return view('dashboard.kelas.create', [
             "title" => "Kelas",
             "kelas" => $kelas,
             "guru" => Guru::all()
@@ -50,7 +50,7 @@ class KelasController extends Controller
         try {
             Kelas::create($request->all());
     
-            return redirect('/kelas')->with('success', 'Data berhasil ditambahkan!');
+            return redirect('/dashboard/kelas')->with('success', 'Data berhasil ditambahkan!');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Gagal menambahkan data. Silakan coba lagi.');
         }
@@ -71,7 +71,7 @@ class KelasController extends Controller
     public function edit($id)
     {
         $kelas = Kelas::findOrFail($id);
-        return view('kelas.edit', [
+        return view('dashboard.kelas.edit', [
             "title" => "Kelas",
             "kelas" => $kelas,
             "guru" => Guru::all()
@@ -87,7 +87,7 @@ class KelasController extends Controller
             $kelasModel = Kelas::findOrFail($kelas);
             $kelasModel->update($request->all());
             
-            return redirect('/kelas')->with('success', 'Data berhasil diedit!');
+            return redirect('/dashboard/kelas')->with('success', 'Data berhasil diedit!');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Gagal mengedit data. Silakan coba lagi.');
         }
@@ -102,9 +102,9 @@ class KelasController extends Controller
             $kelasModel = Kelas::findOrFail($kelas);
             $kelasModel->delete();
 
-            return redirect('/kelas')->with('success', 'Data berhasil dihapus!');
+            return redirect('/dashboard/kelas')->with('success', 'Data berhasil dihapus!');
         } catch (\Exception $e) {
-            return redirect('/kelas')->with('error', 'Gagal menghapus data. Silakan coba lagi.');
+            return redirect('/dashboard/kelas')->with('error', 'Gagal menghapus data. Silakan coba lagi.');
         }
     }
 }

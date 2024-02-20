@@ -6,7 +6,7 @@ use App\Models\Kelas;
 use Illuminate\Http\Request;
 use App\Models\Student;
 
-class StudentsController extends Controller
+class DashboardStudentController extends Controller
 {
     public function index()
     {
@@ -22,7 +22,7 @@ class StudentsController extends Controller
     
         $students = $students->paginate(10);
     
-        return view('student.all', [
+        return view('dashboard.student.all', [
             "title" => "Siswa",
             "students" => $students,
             "kelas" => Kelas::all()
@@ -30,15 +30,15 @@ class StudentsController extends Controller
     }
 
     public function show($student) {
-        return view('student.detail', [
+        return view('dashboard.student.detail', [
             "title" => "Siswa",
             "student" => Student::find($student)
         ]);
     }
 
     public function create(Student $student) {
-        return view('student.create', [
-            "title" => "Siswa",
+        return view('dashboard.student.create', [
+            "title" => "create.student",
             "kelas" => Kelas::all(),
             "student" => $student
         ]);
@@ -65,7 +65,7 @@ class StudentsController extends Controller
     try {
         Student::create($request->all());
 
-        return redirect('/student')->with('success', 'Data berhasil ditambahkan!');
+        return redirect('/dashboard/student')->with('success', 'Data berhasil ditambahkan!');
     } catch (\Exception $e) {
         return redirect()->back()->with('error', 'Gagal menambahkan data. Silakan coba lagi.');
     }
@@ -78,16 +78,16 @@ class StudentsController extends Controller
             $studentModel = Student::findOrFail($student);
             $studentModel->delete();
 
-            return redirect('/student')->with('success', 'Data berhasil dihapus!');
+            return redirect('/dashboard/student')->with('success', 'Data berhasil dihapus!');
         } catch (\Exception $e) {
-            return redirect('/student')->with('error', 'Gagal menghapus data. Silakan coba lagi.');
+            return redirect('/dashboard/student')->with('error', 'Gagal menghapus data. Silakan coba lagi.');
         }
     }
 
     public function edit($id)
     {
         $student = Student::findOrFail($id);
-        return view('student.edit', [
+        return view('dashboard.student.edit', [
             "title" => "Siswa",
             "student" => $student,
             "kelas" => Kelas::all(),
@@ -118,7 +118,7 @@ class StudentsController extends Controller
 
         $studentModel->update($request->all());
 
-        return redirect('/student')->with('success', 'Data berhasil diedit!');
+        return redirect('/dashboard/student')->with('success', 'Data berhasil diedit!');
     } catch (\Exception $e) {
         return redirect()->back()->with('error', 'Gagal mengedit data. Silakan coba lagi.');
     }
@@ -128,8 +128,8 @@ class StudentsController extends Controller
     {
         $dataFilter = Student::where('kelas_id', $kelas_id)->paginate(10);
 
-        return view('student.all', [
-            "title" => "Siswa",
+        return view('dashboard.student.all', [
+            "title" => "Students",
             "students" => $dataFilter,
             "kelas" => Kelas::all()
         ]);

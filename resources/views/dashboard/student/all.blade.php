@@ -1,6 +1,7 @@
-@extends('layouts.main')
+@extends('layouts.maindashboard')
 
 @section('content')
+
 <div class="container">
    <div class="d-flex justify-content-between align-items-center">
       <h2 class="mb-4 fw-bolder">Daftar Siswa</h2>
@@ -11,14 +12,14 @@
                 Filter Kelas
             </button>
             <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="{{ url('/student') }}">Show All</a></li>
+                <li><a class="dropdown-item" href="{{ url('/dashboard/student') }}">Show All</a></li>
                 @foreach ($kelas as $item)
-                    <li><a class="dropdown-item" href="{{ url('/student/filter', $item->id) }}">{{ $item->nama }}</a></li>
+                    <li><a class="dropdown-item" href="{{ url('/dashboard/student/filter', $item->id) }}">{{ $item->nama }}</a></li>
                 @endforeach
             </ul>
          </div>
       
-         <form action="/student/search" class="w-100">
+         <form action="/dashboard/student/search" class="w-100">
             <div class="input-group">
                <input type="text" class="form-control" placeholder="Cari..." name="search" value="{{ request('search') }}">
                <button class="btn btn-primary fw-medium" type="submit">Cari</button>
@@ -61,15 +62,15 @@
                   <td>{{ $student->kelas->nama ?? 'Kelas Tidak Ada'}}</td>
                   <td>
                      @auth
-                        <a href="/student/detail/{{ $student->id }}" class="fw-semibold btn btn-primary btn-sm text-white">Detail</a>
-                        <a href="/student/edit/{{ $student->id }}" class="fw-semibold btn btn-warning btn-sm text-white">Edit</a>
-                        <form action="/student/destroy/{{ $student->id }}" method="POST" style="display: inline;">
+                        <a href="/dashboard/student/detail/{{ $student->id }}" class="fw-semibold btn btn-primary btn-sm text-white">Detail</a>
+                        <a href="/dashboard/student/edit/{{ $student->id }}" class="fw-semibold btn btn-warning btn-sm text-white">Edit</a>
+                        <form action="/dashboard/student/destroy/{{ $student->id }}" method="POST" style="display: inline;">
                            @csrf
                            @method('delete')
                            <button type="submit" class="fw-semibold btn btn-danger btn-sm text-white" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">Delete</button>
                         </form>
                      @else
-                        <a href="/student/detail/{{ $student->id }}" class="fw-semibold btn btn-primary btn-sm text-white">Detail</a>
+                        <a href="/dashboard/student/detail/{{ $student->id }}" class="fw-semibold btn btn-primary btn-sm text-white">Detail</a>
                      @endauth
                   </td>
                </tr>
@@ -85,10 +86,11 @@
 
 <div class="container d-flex justify-content-between align-items-start">
    @auth
-      <a href="/student/create" class="btn btn-primary btn-md fw-medium" role="button">Tambah Data Baru</a>
+      <a href="/dashboard/student/create" class="btn btn-primary btn-md fw-medium" role="button">Tambah Data Baru</a>
    @endif
    <ul class="pagination">
       {{ $students->links() }}
    </ul>
 </div>
+
 @endsection

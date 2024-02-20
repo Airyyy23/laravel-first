@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('layouts.maindashboard')
 
 @section('content')
     <div class="container">
@@ -14,7 +14,7 @@
             </div>
         @endif
 
-        <form action="/student/update/{{ $student->id }}" method="POST" class="row g-3">
+        <form action="/dashboard/student/update/{{ $student->id }}" method="POST" class="row g-3">
             @csrf
             @method('PUT')
 

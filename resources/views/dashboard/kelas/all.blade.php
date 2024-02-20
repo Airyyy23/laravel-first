@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('layouts.maindashboard')
 
 @section('content')
 <div class="container">
@@ -6,7 +6,7 @@
       <h2 class="mb-4 fw-bolder">Daftar Kelas</h2>
 
       <div class="d-flex gap-2">
-         <form action="/kelas/search" class="w-100">
+         <form action="/dashboard/kelas/search" class="w-100">
             <div class="input-group">
                <input type="text" class="form-control" placeholder="Cari..." name="search" value="{{ request('search') }}">
                <button class="btn btn-primary fw-medium" type="submit">Cari</button>
@@ -47,8 +47,8 @@
                   <td>{{ $kelas->guru->nama ?? 'Wali Kelas Tidak Ada' }}</td>
                   <td>
                      @auth
-                        <a href="/kelas/edit/{{ $kelas->id }}" class="fw-semibold btn btn-warning btn-sm text-white">Edit</a>
-                        <form action="/kelas/destroy/{{ $kelas->id }}" method="POST" style="display: inline;">
+                        <a href="/dashboard/kelas/edit/{{ $kelas->id }}" class="fw-semibold btn btn-warning btn-sm text-white">Edit</a>
+                        <form action="/dashboard/kelas/destroy/{{ $kelas->id }}" method="POST" style="display: inline;">
                            @csrf
                            @method('delete')
                            <button type="submit" class="fw-semibold btn btn-danger btn-sm text-white" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">Delete</button>
@@ -67,7 +67,7 @@
 </div>
 
 <div class="container">
-   <a href="/kelas/create" class="btn btn-primary btn-md fw-medium" role="button">Tambah Data Baru</a>
+   <a href="/dashboard/kelas/create" class="btn btn-primary btn-md fw-medium" role="button">Tambah Data Baru</a>
 </div>
 
 @endsection

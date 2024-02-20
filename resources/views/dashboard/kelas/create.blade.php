@@ -1,9 +1,9 @@
-@extends('layouts.main')
+@extends('layouts.maindashboard')
 
 @section('content')
     <h2 class="mb-4 fw-bolder">Tambah Data Kelas</h2>
 
-    <form action="/kelas/add" method="POST" class="row g-3">
+    <form action="/dashboard/kelas/add" method="POST" class="row g-3">
         @csrf
         <div class="col-md-6">
             <label for="nama" class="form-label">Kelas</label>

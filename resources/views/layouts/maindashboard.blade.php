@@ -10,10 +10,14 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
   </head>
   <body>
-   @include('layouts.partial.navbar')
-
-   <div class="container mt-4">
-      @yield('content')
+    
+    <div class="container-fluid vh-100 w-100 d-flex py-4">
+      <div class="position-relative h-100 w-25">
+        @include('layouts.partial.sideNavbar')
+      </div>
+      <div class="w-100">
+        @yield('content')
+      </div>
    </div>
 
    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/js/all.min.js" integrity="sha512-GWzVrcGlo0TxTRvz9ttioyYJ+Wwk9Ck0G81D+eO63BaqHaJ3YZX9wuqjwgfcV/MrB2PhaVX9DkYVhbFpStnqpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>

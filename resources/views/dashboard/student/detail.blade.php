@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('layouts.maindashboard')
 
 @section('content')
     <div class="container w-100">
@@ -27,7 +27,7 @@
                         <input type="text" class="form-control" id="alamat" value="{{ $student->alamat }}" disabled>
                     </div>
                     <div class="mt-4">
-                        <a href="/student" class="btn btn-primary btn-md fw-medium">Back</a>
+                        <a href="/dashboard/student" class="btn btn-primary btn-md fw-medium">Back</a>
                     </div>
                 </div>
             </div>

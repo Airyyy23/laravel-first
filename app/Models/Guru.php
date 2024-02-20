@@ -5,21 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Kelas extends Model
+class Guru extends Model
 {
     use HasFactory;
 
     protected $guarded = ['id'];
 
     protected $fillable = [
-        'nama', 'guru_id'
+        'nama', 'kelas_id', 'tanggal_lahir', 'alamat'
     ];
 
-    public function students() {
-        return $this->hasMany(Student::class);
-    }
-
-    public function guru() {
-        return $this->belongsTo(Guru::class);
+    public function kelas() {
+        return $this->belongsTo(Kelas::class);
     }
 }
